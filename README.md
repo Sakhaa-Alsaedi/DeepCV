@@ -16,13 +16,6 @@ The **DeepCV Alpha Version** is a computational workflow for **variant annotatio
 
 ## 📂 DeepCV Workflow - Files & Descriptions
 
-### **📌 How the Data is Used in DeepCV**
-1️⃣ **The user provides a VCF file** (`.vcf` or `.vcf.gz`) as input.  
-2️⃣ **DeepCV extracts relevant SNPs and mutations**, removing non-informative variants.  
-3️⃣ **Annotation is performed** using clinical databases and functional impact predictors.  
-4️⃣ **Risk scores are computed**, generating a list of **genes associated with disease risk**.  
-5️⃣ **Results are stored in structured output files**, such as `final_risk_assessment.csv`.  
-
 Below is an overview of the **DeepCV workflow** and the corresponding scripts.
 
 | **Filename**                   | **Description**                                                 |
@@ -65,11 +58,11 @@ After execution, DeepCV generates several files:
 | Step3 output: `filtered_by_disease.csv`      | Disease-specific filtered results                          |
 
 
-# DeepCV Alpha - Genetic Risk Scoring Workflow  
+## DeepCV Alpha - Genetic Risk Scoring Workflow  
 The workflow consists of four main steps: VCF processing and filtering, annotation, risk score assessment, and risk graph construction.
 The repository provides code for steps 1 to 3.Below is a detailed description of each step and how it will be executed using DeepCV:
 
-# **DeepCV: Command Guide & Usage Instructions**
+### **DeepCV: Command Guide & Usage Instructions**
 
 - To run DeepCV Alpha, use the following command:
 
@@ -82,7 +75,12 @@ Ensure dependencies are installed before running DeepCV:
 conda env create -f environment.yml
 conda activate DeepCV
 ```
+- or run create setup_deepcv.py:
 
+```bash
+python setup_deepcv.py --input_vcf ./path/input.vcf
+conda activate DeepCV
+```
 ## 2. Executing DeepCV Alpha Workflow Steps
 
 🔹 Full Pipeline with All Diseases
