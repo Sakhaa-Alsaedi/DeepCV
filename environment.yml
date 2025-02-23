@@ -1,0 +1,15 @@
+name: DeepCV
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas
+  - cyvcf2
+  - requests
+  - numpy                # Optimized numerical operations
+  - tqdm                 # Progress bars for tracking execution
+  - concurrentloghandler # Improves multi-threaded logging
+  - pip
+  - pip:
+      - joblib           # Parallel computing library for caching results
