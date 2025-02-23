@@ -1,6 +1,6 @@
 # 🧬 DeepCV Alpha - Genetic Risk Scoring Workflow  
 
-![Image](https://github.com/user-attachments/assets/c46a5164-ab86-401a-9e47-78d14ac3f8ed)
+![Image](https://github.com/user-attachments/assets/6733cd05-ea8f-4194-a533-12be4e781858)
 
 
 ## 🔹 Overview
