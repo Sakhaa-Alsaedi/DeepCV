@@ -1,12 +1,13 @@
 # 🧬 DeepCV Alpha - Genetic Risk Scoring Workflow  
 
+![Image](https://github.com/user-attachments/assets/c46a5164-ab86-401a-9e47-78d14ac3f8ed)
+
+
 ## 🔹 Overview
 The **DeepCV Alpha Version** is a validated workflow for **computational variant annotation and genetic risk scoring**. This pipeline has been tested using **synthetic data from `NICP.vcf`** and **GWAS catalog mutations**.
 Deep Causal Variant Analysis Tool for Risk Assessment
 Decode your genome profile, assess disease risk, protect and proactive health with DeepCV!
 An explainable genome workflow that identifies specific gene roles and quantifies their causal effects on complex traits.
-![image](https://github.com/user-attachments/assets/c42c20ad-e698-4a0d-a4cd-010ed826a128)
-
 
 ### ✅ Purpose  
 - Computes **genetic risk scores** for **each gene associated with a disease**.  
