@@ -62,6 +62,8 @@ After execution, DeepCV generates several files:
 The workflow consists of four main steps: VCF processing and filtering, annotation, risk score assessment, and risk graph construction.
 The repository provides code for steps 1 to 3.Below is a detailed description of each step and how it will be executed using DeepCV:
 
+![Image](https://github.com/user-attachments/assets/ce343b15-477a-4d99-9bad-6acf0692988e)
+
 ### **DeepCV: Command Guide & Usage Instructions**
 
 - To run DeepCV Alpha, use the following command:
