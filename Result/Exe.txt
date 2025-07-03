@@ -1,0 +1,187 @@
+(DeepCV) [alsaedsb@login510-27 DeepCV]$ python DeepCV_Main.py --input_vcf /ibex/user/alsaedsb/test_Neom/DeepCV/NEOM_Data/EG23A585_converted_1000.vcf --output_dir results
+Loaded caches: VEP=2751, GWAS=0, dbSNP=0
+2025-07-03 06:56:11,463 - INFO - Starting Enhanced DeepCV Pipeline with Comprehensive Analysis
+2025-07-03 06:56:11,472 - INFO - ================================================================================
+2025-07-03 06:56:11,473 - INFO - [ENHANCED] ========== STEP 1: VCF PARSING ==========
+2025-07-03 06:56:11,473 - INFO - [ENHANCED] Starting VCF parsing and quality control...
+Loaded 957 variants from /ibex/user/alsaedsb/test_Neom/DeepCV/NEOM_Data/EG23A585_converted_1000.vcf
+Filtered 957 variants (passed quality thresholds)
+ 957 unique variants remain after removing duplicates
+ Filtered data saved to results/processed_variants_EG23A585_converted_1000.csv
+2025-07-03 06:56:11,522 - INFO - [ENHANCED] VCF parsing complete. 957 variants processed. Time taken: 0s
+2025-07-03 06:56:11,522 - INFO - [ENHANCED] ========== STEP 2: SNP ANNOTATION ==========
+2025-07-03 06:56:11,522 - INFO - [ENHANCED] Starting SNP annotation...
+Loaded 957 variants for annotation
+Starting OPTIMIZED SNP annotation...
+Expanding alternative alleles...
+Removing duplicates: 957 -> 957 unique variants
+Cache hit rate: 904/957 (94.5%)
+Querying VEP API with batch requests...
+Querying VEP for 53 uncached variants...
+VEP Batches: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.49s/it]
+Processing VEP results...
+Annotations saved to results/final_annotated_output_EG23A585_converted_1000.csv
+OPTIMIZED annotation completed in -0.0 seconds
+Cache sizes: VEP=2801, GWAS=0, dbSNP=0
+2025-07-03 06:56:14,478 - INFO - [ENHANCED] SNP annotation complete. 957 variants annotated. Time taken: 3s
+2025-07-03 06:56:14,478 - INFO - [ENHANCED] ========== STEP 3: RISK ASSESSMENT ==========
+2025-07-03 06:56:14,478 - INFO - [ENHANCED] Starting genetic risk assessment...
+Loading input file: results/final_annotated_output_EG23A585_converted_1000.csv
+Starting Optimized DeepCV Risk Assessment...
+Preprocessed 957 unique variants.
+Calculated gene scores for 48 genes.
+Integrated gene length information.
+Fetching disease associations for risk assessment...
+Found 226 disease associations.
+Cleaned risk assessment includes 58 meaningful disease associations.
+Filtered out genes with missing names, invalid IDs, and low association scores.
+\n==================================================
+CLEANING SUMMARY:
+==================================================
+Total genes processed: 48
+Genes with missing names: 16
+Genes with invalid IDs: 1
+Meaningful disease associations: 58
+Filtering efficiency: 120.8%
+==================================================
+Cleaned risk assessment saved as 'results/final_risk_assessment_EG23A585_converted_1000.csv'
+File contains 58 meaningful disease associations.
+No disease filtering requested. Analysis complete.
+2025-07-03 06:56:23,205 - INFO - [ENHANCED] Risk assessment complete. 58 meaningful associations found. Time taken: 9s
+2025-07-03 06:56:23,205 - INFO - [ENHANCED] ========== STEP 4: RISK GRAPH VISUALIZATION ==========
+2025-07-03 06:56:23,206 - INFO - [ENHANCED] Starting risk graph visualization and network analysis...
+Top 10 genes by disease association score:
+    1. SAMD11       (score: 0.446)
+    2. PERM1        (score: 0.421)
+    3. HES4         (score: 0.396)
+    4. KLHL17       (score: 0.354)
+    5. OR4F5        (score: 0.341)
+    6. NOC2L        (score: 0.315)
+    7. PLEKHN1      (score: 0.203)
+Loaded 58 disease associations
+Focusing on top 7 genes
+Output directory: results/visualizations_EG23A585_converted_1000
+
+Starting Complete DeepCV Risk Graph Analysis
+======================================================================
+
+STEP 1: Creating STRING Network Plots
+
+STEP 1: Creating Enhanced Network Plot from PPI Data
+Using STRING interaction data directly (no image API)
+Selecting top 10 PPIs per gene to reduce network complexity
+Fetching STRING interactions...
+   Genes: SAMD11, PERM1, HES4, KLHL17, OR4F5, NOC2L, PLEKHN1
+Retrieved 197 high-confidence interactions
+Retrieved 197 high-confidence interactions
+   PERM1: 1 → 1 interactions
+   KLHL17: 1 → 1 interactions
+   NOC2L: 195 → 10 interactions
+Filtered to 12 top interactions (10 per gene)
+PPI source-target CSV saved: results/visualizations_EG23A585_converted_1000/ppi_source_target_interactions.csv
+   Contains 24 source-target pairs
+
+Creating Enhanced Comprehensive Gene-Disease-PPI Network...
+   Enhanced network: 63 nodes, 70 edges
+   7 target genes, 12 PPI partners
+   44 diseases with combined risk scores
+   Edge widths represent risk/confidence scores
+Enhanced comprehensive network saved: results/visualizations_EG23A585_converted_1000/comprehensive_network.png
+
+STEP 2: Fetching STRING Interactions
+Fetching STRING interactions...
+   Genes: SAMD11, PERM1, HES4, KLHL17, OR4F5, NOC2L, PLEKHN1
+Retrieved 197 high-confidence interactions
+
+STEP 3: Creating Custom Disease-Gene-PPI Network
+Creating Enhanced Disease-Gene-PPI Network...
+Fetching STRING interactions...
+   Genes: SAMD11, PERM1, HES4, KLHL17, OR4F5, NOC2L, PLEKHN1
+Retrieved 197 high-confidence interactions
+2025-07-03 06:56:28,236 - ERROR - [ENHANCED] Error in Step 4: name 'output_path' is not defined
+2025-07-03 06:56:28,237 - INFO - [ENHANCED] ========== COMPREHENSIVE VISUALIZATIONS ==========
+2025-07-03 06:56:28,237 - INFO - [ENHANCED] ========== CREATING STEP VISUALIZATIONS ==========
+2025-07-03 06:56:28,237 - INFO - [ENHANCED] Generating comprehensive visualizations for all steps...
+2025-07-03 06:56:28,241 - INFO - [ENHANCED] Creating Step 1 visualizations...
+
+Creating Step 1 Visualizations: VCF Parsing & Quality Control
+   Loaded 957 variants from results/processed_variants_EG23A585_converted_1000.csv
+   Quality distributions saved: results/step_visualizations/step1_quality_distributions_EG23A585_converted_1000.png
+   Variant types plot saved: results/step_visualizations/step1_variant_types_EG23A585_converted_1000.png
+   Created 2 Step 1 visualizations
+2025-07-03 06:56:30,602 - INFO - [ENHANCED] Creating Step 2 visualizations...
+
+Creating Step 2 Visualizations: SNP Annotation Analysis
+   Original: 957 variants, Annotated: 957 variants
+   Annotation summary saved: results/step_visualizations/step2_annotation_summary_EG23A585_converted_1000.png
+   New features list saved: results/step_visualizations/step2_new_features_EG23A585_converted_1000.txt
+   Impact distribution saved: results/step_visualizations/step2_impact_distribution_EG23A585_converted_1000.png
+   Annotation coverage saved: results/step_visualizations/step2_annotation_coverage_EG23A585_converted_1000.png
+   Created 3 Step 2 visualizations
+2025-07-03 06:56:33,172 - INFO - [ENHANCED] Creating Step 3 visualizations...
+
+Creating Step 3 Visualizations: Risk Assessment Analysis
+   Loaded 58 risk associations from results/final_risk_assessment_EG23A585_converted_1000.csv
+   Risk distribution saved: results/step_visualizations/step3_risk_distribution_EG23A585_converted_1000.png
+   Top genes analysis saved: results/step_visualizations/step3_top_genes_EG23A585_converted_1000.png
+   Disease analysis saved: results/step_visualizations/step3_disease_analysis_EG23A585_converted_1000.png
+   Gene-disease heatmap saved: results/step_visualizations/step3_gene_disease_heatmap_EG23A585_converted_1000.png
+   Created 4 Step 3 visualizations
+2025-07-03 06:56:39,411 - INFO - [ENHANCED] Step visualizations complete. Time taken: 11s
+2025-07-03 06:56:39,411 - INFO - [ENHANCED] ========== GENERATING PDF REPORT ==========
+2025-07-03 06:56:39,411 - INFO - [ENHANCED] Creating comprehensive analysis report...
+
+Creating Comprehensive PDF Report
+   PDF report saved: results/DeepCV_Analysis_Report_EG23A585_converted_1000.pdf
+2025-07-03 06:56:46,959 - INFO - [ENHANCED] PDF report generation complete. Time taken: 8s
+2025-07-03 06:56:46,959 - INFO - [ENHANCED] Comprehensive PDF report saved: results/DeepCV_Analysis_Report_EG23A585_converted_1000.pdf
+2025-07-03 06:56:46,959 - INFO - ================================================================================
+2025-07-03 06:56:46,959 - INFO - ENHANCED DEEPCV PIPELINE COMPLETE!
+2025-07-03 06:56:46,959 - INFO - ================================================================================
+2025-07-03 06:56:46,959 - INFO - [ENHANCED] Total processing time: 35s
+2025-07-03 06:56:46,959 - INFO - [ENHANCED] Results saved in: results
+2025-07-03 06:56:46,959 - INFO - 
+COMPREHENSIVE ANALYSIS SUMMARY:
+2025-07-03 06:56:46,959 - INFO - --------------------------------------------------
+2025-07-03 06:56:46,959 - INFO -   STEP1:
+2025-07-03 06:56:46,959 - INFO -     • variants_processed: 957
+2025-07-03 06:56:46,959 - INFO -     • output_file: results/processed_variants_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,959 - INFO -     • columns: ['Chromosome', 'Position', 'ID', 'Reference', 'Alternative', 'Annotation', 'Impact', 'Gene', 'Gene_ID', 'Feature_Type', 'Feature_ID', 'VAF']
+2025-07-03 06:56:46,959 - INFO -   STEP2:
+2025-07-03 06:56:46,959 - INFO -     • variants_annotated: 957
+2025-07-03 06:56:46,959 - INFO -     • new_features_added: 1
+2025-07-03 06:56:46,959 - INFO -     • output_file: results/final_annotated_output_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,959 - INFO -   STEP3:
+2025-07-03 06:56:46,959 - INFO -     • risk_associations: 58
+2025-07-03 06:56:46,959 - INFO -     • unique_genes: 7
+2025-07-03 06:56:46,959 - INFO -     • unique_diseases: 44
+2025-07-03 06:56:46,959 - INFO -     • avg_risk_score: 0.2559445173476501
+2025-07-03 06:56:46,960 - INFO -     • max_risk_score: 0.44560817981330664
+2025-07-03 06:56:46,960 - INFO -     • output_file: results/final_risk_assessment_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,960 - INFO -   STEP4:
+2025-07-03 06:56:46,960 - INFO -     • visualizations_created: 0
+2025-07-03 06:56:46,960 - INFO -     • network_plots: []
+2025-07-03 06:56:46,960 - INFO -     • string_confidence: 0.7
+2025-07-03 06:56:46,960 - INFO -   PDF_REPORT:
+2025-07-03 06:56:46,960 - INFO -     • report_path: results/DeepCV_Analysis_Report_EG23A585_converted_1000.pdf
+2025-07-03 06:56:46,960 - INFO - 
+OUTPUT FILES:
+2025-07-03 06:56:46,960 - INFO - ------------------------------
+2025-07-03 06:56:46,960 - INFO -   • STEP1: results/processed_variants_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,960 - INFO -   • STEP2: results/final_annotated_output_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,960 - INFO -   • STEP3: results/final_risk_assessment_EG23A585_converted_1000.csv
+2025-07-03 06:56:46,960 - INFO - 
+VISUALIZATIONS CREATED:
+2025-07-03 06:56:46,960 - INFO - -----------------------------------
+2025-07-03 06:56:46,960 - INFO -   • STEP1: 2 plots
+2025-07-03 06:56:46,960 - INFO -   • STEP2: 3 plots
+2025-07-03 06:56:46,960 - INFO -   • STEP3: 4 plots
+2025-07-03 06:56:46,960 - INFO -   • TOTAL: 9 visualizations
+2025-07-03 06:56:46,960 - INFO - 
+KEY FINDINGS:
+2025-07-03 06:56:46,960 - INFO - -------------------------
+2025-07-03 06:56:46,960 - INFO -   • 957 genomic variants analyzed
+2025-07-03 06:56:46,960 - INFO -   • 1 new annotation features added
+2025-07-03 06:56:46,960 - INFO -   • 58 disease-gene associations identified
+2025-07-03 06:56:46,961 - INFO -   • 7 unique genes with disease associations
+2025-07-03 06:56:46,961 - INFO -   • 44 unique diseases associated
