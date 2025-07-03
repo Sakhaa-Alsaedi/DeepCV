@@ -92,3 +92,48 @@ def parse_vcf(vcf_file, output_csv=None):
         print(f" Filtered data saved to {output_csv}")
 
     return filtered_df
+
+def main(vcf_file, output_dir):
+    """
+    Main function for Step 1: VCF Processing
+    
+    Args:
+        vcf_file (str): Path to input VCF file
+        output_dir (str): Output directory
+        
+    Returns:
+        pd.DataFrame: Processed variants DataFrame
+    """
+    import os
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Generate output filename
+    vcf_basename = Path(vcf_file).stem
+    output_csv = os.path.join(output_dir, f"processed_variants_{vcf_basename}.csv")
+    
+    # Parse VCF file
+    try:
+        filtered_df = parse_vcf(vcf_file, output_csv)
+        return filtered_df
+    except Exception as e:
+        print(f"Error processing VCF file: {e}")
+        return None
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 3:
+        print("Usage: python step1_processing.py <vcf_file> <output_dir>")
+        sys.exit(1)
+    
+    vcf_file = sys.argv[1]
+    output_dir = sys.argv[2]
+    
+    result = main(vcf_file, output_dir)
+    if result is not None:
+        print(f"Step 1 completed successfully. Processed {len(result)} variants.")
+    else:
+        print("Step 1 failed.")
+        sys.exit(1)
+
