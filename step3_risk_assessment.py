@@ -437,8 +437,6 @@ def main_analysis(df, disease_name=None, output_basename="", output_dir="results
 
 # Example usage:
 # df = pd.read_csv("your_filtered_vcf_data.csv")
-# 
-# # CLEANED VERSION: Only meaningful disease associations in final_risk_assessment.csv
 # final_results = main(df)
 
 
