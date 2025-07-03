@@ -1,0 +1,43 @@
+# DeepCV Requirements - Complete Pipeline with Visualization
+# Core data processing
+pandas>=1.3.0
+numpy>=1.20.0
+
+# VCF processing
+cyvcf2>=0.30.0
+
+# API requests
+requests>=2.25.0
+
+# Parallel processing
+joblib>=1.0.0
+tqdm>=4.60.0
+
+
+# Visualization dependencies
+matplotlib>=3.3.0
+seaborn>=0.11.0
+plotly>=5.0.0
+networkx>=3.0.0
+
+# PDF report generation
+reportlab>=3.6.0
+
+# Optional: Enhanced plotting
+plotly>=5.0.0
+
+# Optional: Statistical analysis
+scipy>=1.7.0
+scikit-learn>=1.0.0
+
+# Optional: Better progress bars
+rich>=10.0.0
+
+
+# PDF report generation
+reportlab>=3.6.0
+
+# Optional: Enhanced plotting
+pillow>=8.0.0
+scipy>=1.7.0
+
