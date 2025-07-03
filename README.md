@@ -1,4 +1,4 @@
-# DeepCV (Alpha version, 10 Feb 2025) - Genetic Risk Scoring Workflow  
+# DeepCV (Alpha version) - Genetic Risk Scoring Workflow  
 
 ![Image](https://github.com/user-attachments/assets/6733cd05-ea8f-4194-a533-12be4e781858)
 
@@ -134,7 +134,7 @@ python DeepCV_Main.py --input_vcf your_file.vcf --output_dir results --skip_visu
 | `--skip_visualization` | Skip network analysis | `False` |
 | `--help` | Show help message | - |
 
-## 📊 Pipeline Steps
+## Pipeline Steps
 
 ### Step 1: VCF Parsing & Quality Control
 - Loads and filters VCF files based on quality thresholds
@@ -160,11 +160,11 @@ python DeepCV_Main.py --input_vcf your_file.vcf --output_dir results --skip_visu
 
 ```
 results/
-├── 📊 Core Analysis Files
+├── Core Analysis Files
 │   ├── processed_variants_[filename].csv          # Step 1: Filtered variants
 │   ├── final_annotated_output_[filename].csv      # Step 2: Annotated variants
 │   └── final_risk_assessment_[filename].csv       # Step 3: Disease associations
-├── 📈 Step-by-Step Visualizations
+├── Step-by-Step Visualizations
 │   ├── step1_quality_distributions_[filename].png
 │   ├── step1_variant_types_[filename].png
 │   ├── step2_annotation_summary_[filename].png
@@ -174,15 +174,15 @@ results/
 │   ├── step3_top_genes_[filename].png
 │   ├── step3_disease_analysis_[filename].png
 │   └── step3_gene_disease_heatmap_[filename].png
-├── 🕸️ Network Analysis
+├── Network Analysis
 │   ├── comprehensive_network.png
 │   ├── disease_gene_ppi_network.png
 │   └── ppi_source_target_interactions.csv
-└── 📄 Comprehensive Report
+└── Comprehensive Report
     └── DeepCV_Analysis_Report_[filename].pdf
 ```
 
-## 🔬 Example Analysis Results
+## Example Analysis Results
 
 Using the provided `Demo.vcf` file:
 
@@ -205,7 +205,7 @@ Using the provided `Demo.vcf` file:
 4. **SPAST** (score: 0.867) - Spastic paraplegia
 5. **GALC** (score: 0.859) - Krabbe disease
 
-## 🛠️ Installation
+## Installation
 
 ### Option 1: Clone Repository
 ```bash
@@ -224,7 +224,7 @@ Download the following core files:
 - `deepcv_step_visualizations.py`
 - `deepcv_pdf_report.py`
 
-## 📋 Requirements
+## Requirements
 
 ### Python Dependencies
 ```
@@ -246,14 +246,14 @@ cyvcf2>=0.30.0
 - **STRING API**: For protein-protein interactions (no API key required)
 - **Open Targets API**: For disease associations (no API key required)
 
-## 🎯 Performance Features
+## Performance Features
 
 - **Intelligent Caching**: VEP annotations are cached for faster repeated analyses
 - **Batch Processing**: API requests are batched for optimal performance
 - **Parallel Processing**: Multi-threaded operations where applicable
 - **Memory Optimization**: Efficient data handling for large VCF files
 
-## 📊 Visualization Gallery
+## Visualization Gallery
 
 ### Quality Control Plots
 - Variant quality score distributions
@@ -277,7 +277,7 @@ cyvcf2>=0.30.0
 - High-confidence interaction filtering
 
 
-## 📚 Documentation
+## Documentation
 
 ### File Descriptions
 - `DeepCV_Main.py`: Main pipeline orchestrator
@@ -293,7 +293,7 @@ cyvcf2>=0.30.0
 - [STRING API](https://string-db.org/help/api/)
 - [Open Targets API](https://platform-docs.opentargets.org/)
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please feel free to submit issues, feature requests, or pull requests.
 
@@ -307,7 +307,7 @@ pip install -r requirements.txt
 python DeepCV_Main.py --input_vcf ./Data/Demo.vcf --output_dir test_results
 ```
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
