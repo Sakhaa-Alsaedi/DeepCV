@@ -8,8 +8,6 @@ This module creates comprehensive visualizations including:
 2. High-quality STRING network plots using STRING API
 3. Comprehensive analysis reports and statistics
 
-Author: Enhanced for DeepCV pipeline
-Date: 2025-01-03
 """
 
 import pandas as pd
@@ -55,9 +53,9 @@ class RiskGraphVisualizer:
         self.df = pd.read_csv(risk_assessment_file)
         self.top_genes = self._get_top_genes()
         
-        print(f"🧬 Loaded {len(self.df)} disease associations")
-        print(f"🎯 Focusing on top {len(self.top_genes)} genes")
-        print(f"📁 Output directory: {self.output_dir}")
+        print(f"Loaded {len(self.df)} disease associations")
+        print(f"Focusing on top {len(self.top_genes)} genes")
+        print(f"Output directory: {self.output_dir}")
     
     def _get_top_genes(self, n=10):
         """
@@ -73,7 +71,7 @@ class RiskGraphVisualizer:
         gene_scores = self.df.groupby('Gene')['score'].max().sort_values(ascending=False)
         top_genes = gene_scores.head(n).index.tolist()
         
-        print(f"🏆 Top {n} genes by disease association score:")
+        print(f"Top {n} genes by disease association score:")
         for i, (gene, score) in enumerate(gene_scores.head(n).items(), 1):
             print(f"   {i:2d}. {gene:<12} (score: {score:.3f})")
         
@@ -109,7 +107,7 @@ class RiskGraphVisualizer:
         }
         
         try:
-            print(f"🌐 Fetching STRING network for {len(gene_list)} genes...")
+            print(f"Fetching STRING network for {len(gene_list)} genes...")
             print(f"   Genes: {', '.join(gene_list)}")
             print(f"   Confidence threshold: {confidence_threshold}")
             print(f"   Network type: {network_type}")
@@ -119,16 +117,16 @@ class RiskGraphVisualizer:
             if response.status_code == 200:
                 # Convert response to PIL Image
                 image = Image.open(BytesIO(response.content))
-                print(f"✅ STRING network image retrieved ({image.size[0]}x{image.size[1]})")
+                print(f"STRING network image retrieved ({image.size[0]}x{image.size[1]})")
                 return image
             else:
-                print(f"❌ STRING API error: {response.status_code}")
+                print(f"STRING API error: {response.status_code}")
                 print(f"   URL: {response.url}")
                 print(f"   Response: {response.text[:200]}...")
                 return None
                 
         except Exception as e:
-            print(f"❌ Error fetching STRING network: {e}")
+            print(f"Error fetching STRING network: {e}")
             return None
     
     def get_string_interactions(self, gene_list, confidence_threshold=0.7):
@@ -156,7 +154,7 @@ class RiskGraphVisualizer:
         }
         
         try:
-            print(f"🔗 Fetching STRING interactions...")
+            print(f" Fetching STRING interactions...")
             print(f"   Genes: {', '.join(gene_list)}")
             response = requests.get(url, params=params, timeout=30)
             
@@ -179,17 +177,17 @@ class RiskGraphVisualizer:
                         interactions_df['score'] = pd.to_numeric(interactions_df['score'], errors='coerce')
                         interactions_df = interactions_df[interactions_df['score'] >= confidence_threshold]
                         
-                        print(f"✅ Retrieved {len(interactions_df)} high-confidence interactions")
+                        print(f"Retrieved {len(interactions_df)} high-confidence interactions")
                         return interactions_df
                     
-            print(f"❌ No interactions found or API error: {response.status_code}")
+            print(f"No interactions found or API error: {response.status_code}")
             if response.status_code != 200:
                 print(f"   URL: {response.url}")
                 print(f"   Response: {response.text[:200]}...")
             return pd.DataFrame()
             
         except Exception as e:
-            print(f"❌ Error fetching STRING interactions: {e}")
+            print(f" Error fetching STRING interactions: {e}")
             return pd.DataFrame()
     
     def create_string_network_plots(self, confidence_threshold=0.7):
@@ -205,19 +203,19 @@ class RiskGraphVisualizer:
         """
         plots_created = {}
         
-        print(f"\n🌐 STEP 1: Creating Enhanced Network Plot from PPI Data")
-        print(f"✅ Using STRING interaction data directly (no image API)")
-        print(f"🎯 Selecting top 10 PPIs per gene to reduce network complexity")
+        print(f"\nSTEP 1: Creating Enhanced Network Plot from PPI Data")
+        print(f" Using STRING interaction data directly (no image API)")
+        print(f" Selecting top 10 PPIs per gene to reduce network complexity")
         
         # Get STRING interactions for all plots
         interactions_df = self.get_string_interactions(self.top_genes, confidence_threshold)
         
         if not interactions_df.empty:
-            print(f"✅ Retrieved {len(interactions_df)} high-confidence interactions")
+            print(f" Retrieved {len(interactions_df)} high-confidence interactions")
             
             # Filter to top 10 PPIs per gene
             filtered_interactions_df = self._filter_top_ppis_per_gene(interactions_df, top_n=10)
-            print(f"🎯 Filtered to {len(filtered_interactions_df)} top interactions ({10} per gene)")
+            print(f" Filtered to {len(filtered_interactions_df)} top interactions ({10} per gene)")
             
             # Save PPI interactions as source-target CSV
             ppi_csv_path = os.path.join(self.output_dir, 'ppi_source_target_interactions.csv')
@@ -231,10 +229,10 @@ class RiskGraphVisualizer:
             
             if comprehensive_plot_path:
                 plots_created['comprehensive_network.png'] = "Enhanced Comprehensive Gene-Disease-PPI Network with Risk Scores"
-                print(f"✅ Enhanced comprehensive network saved: {comprehensive_plot_path}")
+                print(f"Enhanced comprehensive network saved: {comprehensive_plot_path}")
             
         else:
-            print(f"❌ No STRING interaction data available")
+            print(f" No STRING interaction data available")
             print(f"   This may indicate that the genes don't have known protein interactions")
         
         return plots_created
@@ -343,7 +341,7 @@ class RiskGraphVisualizer:
                     G.add_edge(gene_a, gene_b, weight=score)
             
             if len(G.nodes()) == 0:
-                print(f"   ❌ No network data available for {title}")
+                print(f"    No network data available for {title}")
                 return None
             
             # Create plot
@@ -402,7 +400,7 @@ class RiskGraphVisualizer:
             return output_path
             
         except Exception as e:
-            print(f"   ❌ Error creating custom plot: {e}")
+            print(f"   Error creating custom plot: {e}")
             return None
     
     def _save_ppi_source_target_csv(self, interactions_df, output_path):
@@ -443,11 +441,11 @@ class RiskGraphVisualizer:
             ppi_df = ppi_df.drop_duplicates()  # Remove any duplicates
             ppi_df.to_csv(output_path, index=False)
             
-            print(f"✅ PPI source-target CSV saved: {output_path}")
+            print(f" PPI source-target CSV saved: {output_path}")
             print(f"   Contains {len(ppi_df)} source-target pairs")
             
         except Exception as e:
-            print(f"❌ Error saving PPI CSV: {e}")
+            print(f" Error saving PPI CSV: {e}")
     
     def _filter_top_ppis_per_gene(self, interactions_df, top_n=10):
         """
@@ -478,7 +476,7 @@ class RiskGraphVisualizer:
                     top_interactions = gene_interactions.head(top_n)
                     filtered_interactions.append(top_interactions)
                     
-                    print(f"   🧬 {target_gene}: {len(gene_interactions)} → {len(top_interactions)} interactions")
+                    print(f"   {target_gene}: {len(gene_interactions)} → {len(top_interactions)} interactions")
             
             if filtered_interactions:
                 # Combine all filtered interactions
@@ -490,7 +488,7 @@ class RiskGraphVisualizer:
                 return pd.DataFrame()
                 
         except Exception as e:
-            print(f"❌ Error filtering PPIs: {e}")
+            print(f" Error filtering PPIs: {e}")
             return interactions_df  # Return original if filtering fails
     
     def _create_enhanced_comprehensive_network_plot(self, interactions_df, confidence_threshold):
@@ -505,7 +503,7 @@ class RiskGraphVisualizer:
             str: Path to saved enhanced comprehensive network plot
         """
         try:
-            print(f"\n🎨 Creating Enhanced Comprehensive Gene-Disease-PPI Network...")
+            print(f"\n Creating Enhanced Comprehensive Gene-Disease-PPI Network...")
             
             # Create network graph
             G = nx.Graph()
@@ -582,7 +580,7 @@ class RiskGraphVisualizer:
                               confidence_score=ppi_score)
             
             if len(G.nodes()) == 0:
-                print(f"   ❌ No network data available")
+                print(f"   No network data available")
                 return None
             
             # Create enhanced plot with better layout
@@ -698,15 +696,15 @@ class RiskGraphVisualizer:
             plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
             plt.close()
             
-            print(f"   📊 Enhanced network: {len(G.nodes())} nodes, {len(G.edges())} edges")
-            print(f"   🧬 {len(target_gene_nodes)} target genes, {len(ppi_partner_nodes)} PPI partners")
-            print(f"   🏥 {len(disease_nodes)} diseases with combined risk scores")
-            print(f"   🎯 Edge widths represent risk/confidence scores")
+            print(f"   Enhanced network: {len(G.nodes())} nodes, {len(G.edges())} edges")
+            print(f"   {len(target_gene_nodes)} target genes, {len(ppi_partner_nodes)} PPI partners")
+            print(f"   {len(disease_nodes)} diseases with combined risk scores")
+            print(f"   Edge widths represent risk/confidence scores")
             
             return output_path
             
         except Exception as e:
-            print(f"   ❌ Error creating enhanced comprehensive network: {e}")
+            print(f"   Error creating enhanced comprehensive network: {e}")
             return None
     
     def _create_improved_layout(self, G):
@@ -766,7 +764,7 @@ class RiskGraphVisualizer:
             return pos
             
         except Exception as e:
-            print(f"   ⚠️ Layout error, using spring layout: {e}")
+            print(f"   Layout error, using spring layout: {e}")
             return nx.spring_layout(G, k=3, iterations=50)
     
     def _draw_enhanced_labels(self, G, pos, ax):
@@ -800,7 +798,7 @@ class RiskGraphVisualizer:
                                       font_weight='normal', font_color='darkred', ax=ax)
             
         except Exception as e:
-            print(f"   ⚠️ Warning: Could not draw enhanced labels: {e}")
+            print(f"   Warning: Could not draw enhanced labels: {e}")
     
     def _create_comprehensive_network_plot(self, interactions_df, confidence_threshold):
         """
@@ -814,7 +812,7 @@ class RiskGraphVisualizer:
             str: Path to saved comprehensive network plot
         """
         try:
-            print(f"\n🎨 Creating Comprehensive Gene-Disease-PPI Network...")
+            print(f"\n Creating Comprehensive Gene-Disease-PPI Network...")
             
             # Create network graph
             G = nx.Graph()
@@ -889,7 +887,7 @@ class RiskGraphVisualizer:
                               weight=ppi_score)
             
             if len(G.nodes()) == 0:
-                print(f"   ❌ No network data available")
+                print(f"   No network data available")
                 return None
             
             # Create comprehensive plot
@@ -980,14 +978,14 @@ class RiskGraphVisualizer:
             plt.savefig(output_path, dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(f"   📊 Network contains {len(G.nodes())} nodes and {len(G.edges())} edges")
-            print(f"   🧬 {len(target_gene_nodes)} target genes, {len(ppi_partner_nodes)} PPI partners")
-            print(f"   🏥 {len(disease_nodes)} diseases with combined risk scores")
+            print(f"   Network contains {len(G.nodes())} nodes and {len(G.edges())} edges")
+            print(f"   {len(target_gene_nodes)} target genes, {len(ppi_partner_nodes)} PPI partners")
+            print(f"   {len(disease_nodes)} diseases with combined risk scores")
             
             return output_path
             
         except Exception as e:
-            print(f"   ❌ Error creating comprehensive network: {e}")
+            print(f"   Error creating comprehensive network: {e}")
             return None
     
     def _create_hierarchical_layout(self, G):
@@ -1053,7 +1051,7 @@ class RiskGraphVisualizer:
             nx.draw_networkx_labels(G, pos, labels, font_size=8, font_weight='bold', ax=ax)
             
         except Exception as e:
-            print(f"   ⚠️ Warning: Could not draw labels: {e}")
+            print(f"   Warning: Could not draw labels: {e}")
     
     def create_disease_gene_network(self, confidence_threshold=0.7):
         """
@@ -1065,7 +1063,7 @@ class RiskGraphVisualizer:
         Outputs:
             str: Path to saved network plot
         """
-        print(f"\n🔗 Creating Enhanced Disease-Gene-PPI Network...")
+        print(f"\n Creating Enhanced Disease-Gene-PPI Network...")
         
         # Get STRING interactions for top genes
         interactions_df = self.get_string_interactions(self.top_genes, confidence_threshold)
@@ -1204,9 +1202,9 @@ class RiskGraphVisualizer:
         plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
         
-        print(f"✅ Enhanced Disease-Gene-PPI network saved: {output_path}")
-        print(f"   📊 {len(disease_nodes)} diseases, {len(gene_nodes)} genes")
-        print(f"   🔗 {len(disease_edges)} disease associations, {len(ppi_edges)} PPI interactions")
+        print(f" Enhanced Disease-Gene-PPI network saved: {output_path}")
+        print(f"   {len(disease_nodes)} diseases, {len(gene_nodes)} genes")
+        print(f"   {len(disease_edges)} disease associations, {len(ppi_edges)} PPI interactions")
         
         return output_path
     
@@ -1268,7 +1266,7 @@ class RiskGraphVisualizer:
             return pos
             
         except Exception as e:
-            print(f"   ⚠️ Layout error, using spring layout: {e}")
+            print(f"   Layout error, using spring layout: {e}")
             return nx.spring_layout(G, k=4, iterations=100)
     
     def _draw_enhanced_disease_gene_labels(self, G, pos, ax):
@@ -1282,7 +1280,7 @@ class RiskGraphVisualizer:
             
             # Label only top diseases by risk score to avoid clutter
             disease_nodes = [(n, d.get('risk_score', 0)) for n, d in G.nodes(data=True) 
-                           if d.get('node_type') == 'disease']
+                          if d.get('node_type') == 'disease']
             disease_nodes.sort(key=lambda x: x[1], reverse=True)
             
             # Select top diseases but limit to avoid overcrowding
@@ -1319,9 +1317,7 @@ class RiskGraphVisualizer:
             
         except Exception as e:
             print(f"   ⚠️ Warning: Could not draw enhanced labels: {e}")
-        
-        print(f"✅ Disease-Gene-PPI network saved: {output_path}")
-        return output_path
+
     
     def create_analysis_summary(self):
         """
